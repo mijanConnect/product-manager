@@ -1,4 +1,5 @@
-@import "./globals";
+@use "sass:color";
+@use "./globals" as *;
 
 @mixin input-focus {
   border-color: $primary-color;
@@ -211,7 +212,7 @@
         color: $white;
 
         &:hover {
-          background-color: darken($primary-color, 10%);
+          background-color: color.adjust($primary-color, $lightness: -10%);
         }
 
         &:disabled {

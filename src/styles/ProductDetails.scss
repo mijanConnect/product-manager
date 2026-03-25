@@ -1,4 +1,5 @@
-@import "./globals";
+@use "sass:color";
+@use "./globals" as *;
 
 .product-detail-container {
   background-color: $white;
@@ -219,7 +220,7 @@
         color: $white;
 
         &:hover:not(:disabled) {
-          background-color: darken($primary-color, 10%);
+          background-color: color.adjust($primary-color, $lightness: -10%);
         }
 
         &:disabled {

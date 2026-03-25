@@ -99,7 +99,7 @@ export const ProductDetails: React.FC = () => {
     : null;
 
   return (
-    <div className="product-detail-container">
+    <div className="product-detail-container rounded-lg shadow-md">
       <Button
         icon={<ArrowLeftOutlined />}
         onClick={handleBack}
