@@ -1,0 +1,208 @@
+// Variables
+$primary-color: #1890ff;
+$success-color: #52c41a;
+$warning-color: #faad14;
+$error-color: #f5222d;
+$text-primary: #1f2937;
+$text-secondary: #6b7280;
+$border-color: #e5e7eb;
+$bg-light: #f9fafb;
+$bg-lighter: #f0f2f5;
+$white: #ffffff;
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+$shadow-card: 0 2px 8px rgba(0, 0, 0, 0.1);
+$border-radius: 8px;
+$border-radius-sm: 4px;
+$padding-lg: 24px;
+$padding-md: 16px;
+$padding-sm: 12px;
+$gap-lg: 16px;
+$gap-md: 12px;
+$gap-sm: 8px;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'mobile' {
+    @media (max-width: 640px) {
+      @content;
+    }
+  } @else if $breakpoint == 'tablet' {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  } @else if $breakpoint == 'desktop' {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  }
+}
+
+// Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  color: $text-primary;
+  background-color: #f5f5f5;
+}
+
+// Typography
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: $text-primary;
+
+  @include respond-to('mobile') {
+    font-size: 24px;
+  }
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: $text-primary;
+
+  @include respond-to('mobile') {
+    font-size: 18px;
+  }
+}
+
+p {
+  color: $text-secondary;
+  line-height: 1.6;
+}
+
+a {
+  color: $primary-color;
+  @include transition(color);
+
+  &:hover {
+    color: darken($primary-color, 10%);
+  }
+}
+
+// Button Styles
+.btn-primary {
+  background-color: $primary-color;
+  color: $white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: $border-radius-sm;
+  font-weight: 500;
+  cursor: pointer;
+  @include transition(background-color);
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+
+  &:disabled {
+    background-color: #d9d9d9;
+    cursor: not-allowed;
+  }
+}
+
+.btn-secondary {
+  background-color: $white;
+  color: $text-primary;
+  padding: 10px 16px;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  font-weight: 500;
+  cursor: pointer;
+  @include transition(all);
+
+  &:hover {
+    border-color: $primary-color;
+    color: $primary-color;
+  }
+}
+
+// Container Styles
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.card {
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $shadow-md;
+  padding: $padding-md;
+  @include transition(box-shadow);
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+// Loading and Error States
+.loading {
+  @include flex-center;
+  min-height: 200px;
+
+  .spinner {
+    border: 4px solid $bg-lighter;
+    border-top: 4px solid $primary-color;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.error-message {
+  padding: 12px 16px;
+  background-color: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid $error-color;
+  border-radius: $border-radius-sm;
+  margin-bottom: 16px;
+}
+
+.empty-state {
+  @include flex-center;
+  flex-direction: column;
+  min-height: 300px;
+  gap: 16px;
+  color: $text-secondary;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
