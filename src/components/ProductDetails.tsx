@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Button,
   Drawer,
@@ -12,7 +12,10 @@ import {
 } from "antd";
 import { ArrowLeftOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetProductByIdQuery } from "../services/productsApi";
+import {
+  useGetProductByIdQuery,
+  useGetCategoriesQuery,
+} from "../services/productsApi";
 import { EditProductForm } from "./EditProductForm";
 import { formatPrice } from "../utils/validation";
 import type { FormValues } from "../types";
@@ -29,6 +32,17 @@ export const ProductDetails: React.FC = () => {
     isLoading,
     error,
   } = useGetProductByIdQuery(productId!);
+
+  const { data: categories = [] } = useGetCategoriesQuery();
+
+  // Create category slug to name mapping
+  const categoryMap = useMemo(() => {
+    const map: Record<string, string> = {};
+    categories.forEach((cat) => {
+      map[cat.slug] = cat.name;
+    });
+    return map;
+  }, [categories]);
 
   const handleBack = () => {
     navigate("/products");
@@ -152,6 +166,7 @@ export const ProductDetails: React.FC = () => {
                   borderRadius: "8px",
                 }}
               />
+              categoryMap[product.category] ||
             </div>
           ) : (
             <Empty description="No image available" />
@@ -162,7 +177,9 @@ export const ProductDetails: React.FC = () => {
         <div className="product-info-section">
           <div style={{ marginBottom: 24 }}>
             <div style={{ marginBottom: 8 }}>
-              <span className="text-sm text-gray-500">{product.category}</span>
+              <span className="text-sm text-gray-500">
+                {categoryMap[product.category] || product.category}
+              </span>
             </div>
             <h1>{product.title}</h1>
             <div

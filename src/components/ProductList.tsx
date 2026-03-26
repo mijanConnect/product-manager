@@ -25,8 +25,8 @@ export const ProductList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState(
     searchParams.get("search") || "",
   );
-  const [selectedCategory, setSelectedCategory] = useState<string | undefined>(
-    searchParams.get("category") || undefined,
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    searchParams.get("category") || "",
   );
   const [isSearching, setIsSearching] = useState(
     (searchParams.get("search") || "").trim().length > 0,
@@ -41,7 +41,7 @@ export const ProductList: React.FC = () => {
     if (searchQuery) {
       params.set("q", searchQuery);
     }
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory.trim() !== "") {
       params.set("category", selectedCategory);
     }
     setSearchParams(params);
@@ -91,7 +91,7 @@ export const ProductList: React.FC = () => {
     if (searchQuery && isSearching) {
       return searchResults.slice(skip, skip + ITEMS_PER_PAGE);
     }
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory.trim() !== "") {
       return categoryProducts;
     }
     return allProducts;
@@ -109,7 +109,7 @@ export const ProductList: React.FC = () => {
     if (searchQuery && isSearching) {
       return searchTotal;
     }
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory.trim() !== "") {
       return categoryTotal;
     }
     return allTotal;
@@ -126,7 +126,7 @@ export const ProductList: React.FC = () => {
     if (searchQuery && isSearching) {
       return searchLoading;
     }
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory.trim() !== "") {
       return categoryLoading;
     }
     return allLoading;
@@ -145,7 +145,7 @@ export const ProductList: React.FC = () => {
     setIsSearching(value.trim().length > 0);
   };
 
-  const handleCategoryChange = (value: string | undefined) => {
+  const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
     setSearchQuery("");
     setCurrentPage(1);
@@ -243,13 +243,14 @@ export const ProductList: React.FC = () => {
           <div className="filter-wrapper">
             <Select
               placeholder="Filter by category"
+              className="category-select"
               style={{ width: 200 }}
-              value={selectedCategory}
+              value={selectedCategory || undefined}
               onChange={handleCategoryChange}
               allowClear
               size="large"
               options={[
-                { label: "All Categories", value: undefined },
+                { label: "All Categories", value: "" },
                 ...categories.map((cat) => ({
                   label: cat.name,
                   value: cat.slug,

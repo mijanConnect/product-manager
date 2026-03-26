@@ -1,25 +1,12 @@
-@use "sass:color";
-@use "./globals" as *;
-
-@mixin input-focus {
-  border-color: $primary-color;
-  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
-  outline: none;
-}
-
 .form-container {
-  padding: $padding-md 0;
+  padding: 16px 0;
 }
 
 .form-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: $gap-lg;
-  margin-bottom: $padding-md;
-
-  @include respond-to("mobile") {
-    grid-template-columns: 1fr;
-  }
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .full-width-field {
@@ -27,265 +14,143 @@
 }
 
 .error-message {
-  color: $error-color;
+  color: var(--error);
   font-size: 12px;
   margin-top: 4px;
   font-weight: 500;
 }
 
 .edit-product-form {
-  padding: $padding-md 0;
+  padding: 16px 0;
+}
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.form-group .required {
+  color: var(--error);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  background-color: var(--bg);
+  transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.15);
+  outline: none;
+}
+
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  cursor: not-allowed;
+}
+
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+  border-color: var(--error);
+  background-color: #fee2e2;
+}
+
+.form-group input.error:focus,
+.form-group select.error:focus,
+.form-group textarea.error:focus {
+  border-color: var(--error);
+  box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.15);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.form-actions button {
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.form-actions button.primary {
+  background-color: var(--primary);
+  color: var(--bg);
+}
+
+.form-actions button.primary:hover {
+  opacity: 0.9;
+}
+
+.form-actions button.secondary {
+  background-color: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.form-actions button.secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.success-message {
+  padding: 12px 16px;
+  background-color: #f0fdf4;
+  border-left: 4px solid var(--success);
+  border-radius: 4px;
+  margin-bottom: 16px;
+  color: #166534;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
   .form-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: $gap-lg;
-    margin-bottom: $padding-md;
-
-    @include respond-to("mobile") {
-      grid-template-columns: 1fr;
-    }
-
-    .full-width {
-      grid-column: 1 / -1;
-    }
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-
-    label {
-      font-size: 14px;
-      font-weight: 600;
-      color: $text-primary;
-      margin-bottom: $gap-sm;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-
-      .required {
-        color: $error-color;
-      }
-    }
-
-    input,
-    select,
-    textarea {
-      padding: $gap-sm $padding-sm;
-      border: 1px solid $border-color;
-      border-radius: $border-radius-sm;
-      font-size: 14px;
-      font-family: inherit;
-      color: $text-primary;
-      background-color: $white;
-      transition: all 0.2s ease;
-
-      &:focus {
-        @include input-focus;
-      }
-
-      &:disabled {
-        background-color: $bg-light;
-        color: $text-secondary;
-        cursor: not-allowed;
-      }
-
-      &.error {
-        border-color: $error-color;
-        background-color: #fee2e2;
-
-        &:focus {
-          border-color: $error-color;
-          box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.2);
-        }
-      }
-    }
-
-    input[type="number"] {
-      &::-webkit-outer-spin-button,
-      &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-
-      &:focus {
-        resize: vertical;
-      }
-    }
-
-    .error-message {
-      color: $error-color;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    .input-hint {
-      color: $text-secondary;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: $gap-lg;
-
-    @include respond-to("mobile") {
-      grid-template-columns: 1fr;
-    }
-
-    &.full-width {
-      grid-column: 1 / -1;
-    }
-  }
-
-  .rating-field {
-    .rating-display {
-      display: flex;
-      align-items: center;
-      gap: $gap-md;
-
-      .stars {
-        font-size: 20px;
-        color: $warning-color;
-
-        .star {
-          cursor: pointer;
-          transition: transform 0.2s ease;
-
-          &:hover {
-            transform: scale(1.2);
-          }
-        }
-      }
-
-      .rating-value {
-        font-weight: 600;
-        color: $text-primary;
-        min-width: 50px;
-      }
-    }
-  }
-
-  .select-field {
-    select {
-      appearance: none;
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-      background-repeat: no-repeat;
-      background-position: right 8px center;
-      background-size: 20px;
-      padding-right: 32px;
-      cursor: pointer;
-    }
+    grid-template-columns: 1fr;
   }
 
   .form-actions {
-    display: flex;
-    gap: $gap-md;
-    justify-content: flex-end;
-    margin-top: $padding-lg;
-    padding-top: $padding-md;
-    border-top: 1px solid $border-color;
-
-    @include respond-to("mobile") {
-      flex-direction: column-reverse;
-    }
-
-    .btn {
-      padding: $gap-sm $padding-md;
-      border-radius: $border-radius-sm;
-      border: none;
-      font-weight: 500;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-
-      &.primary {
-        background-color: $primary-color;
-        color: $white;
-
-        &:hover {
-          background-color: color.adjust($primary-color, $lightness: -10%);
-        }
-
-        &:disabled {
-          background-color: #d9d9d9;
-          cursor: not-allowed;
-        }
-      }
-
-      &.secondary {
-        background-color: $white;
-        color: $text-primary;
-        border: 1px solid $border-color;
-
-        &:hover {
-          border-color: $primary-color;
-          color: $primary-color;
-        }
-      }
-    }
+    flex-direction: column-reverse;
+    gap: 8px;
   }
 
-  .field-group {
-    &.field-pricing {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: $gap-lg;
-
-      @include respond-to("mobile") {
-        grid-template-columns: 1fr;
-      }
-
-      .discount {
-        grid-column: 1 / -1;
-      }
-    }
-  }
-
-  .validation-summary {
-    padding: 12px 16px;
-    background-color: #fee2e2;
-    border-left: 4px solid $error-color;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    color: #991b1b;
-
-    h4 {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 20px;
-      font-size: 13px;
-
-      li {
-        margin-bottom: 4px;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-
-  .success-message {
-    padding: 12px 16px;
-    background-color: #f0fdf4;
-    border-left: 4px solid $success-color;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    color: #166534;
-    font-size: 14px;
+  .form-actions button {
+    width: 100%;
   }
 }

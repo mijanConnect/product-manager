@@ -1,11 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseApi } from "./baseApi";
 import type { Product, ProductsResponse, Category } from "../types";
 
-const BASE_URL = "https://dummyjson.com";
-
-export const productsApi = createApi({
-  reducerPath: "productsApi",
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+export const productsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query<
       ProductsResponse,
@@ -35,6 +31,7 @@ export const productsApi = createApi({
         `/products/category/${category}?limit=${limit}&skip=${skip}`,
     }),
   }),
+  overrideExisting: false,
 });
 
 export const {
