@@ -206,7 +206,7 @@ export const ProductDetails: React.FC = () => {
           <div
             style={{
               marginBottom: 24,
-              padding: "16px",
+              padding: "16px 0",
               backgroundColor: "#f0f2f5",
               borderRadius: "8px",
             }}
