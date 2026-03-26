@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Form, Input, InputNumber, Select, Button, Space, Rate } from "antd";
+import { Form, Input, InputNumber, Select, Button, Space } from "antd";
 import type { FormValues, Product, Category } from "../types";
 import { validateProductForm, getInitialFormValues } from "../utils/validation";
 import { useGetCategoriesQuery } from "../services/productsApi";
@@ -135,18 +135,6 @@ export const EditProductForm: React.FC<EditProductFormProps> = ({
         </div>
 
         <div className="form-section">
-          <div>
-            <Form.Item label="Rating" name="rating">
-              <div className="flex items-center gap-2">
-                <Rate />
-                <span>{form.getFieldValue("rating") || 0} / 5</span>
-              </div>
-            </Form.Item>
-            {errors.rating && (
-              <div className="error-message">{errors.rating}</div>
-            )}
-          </div>
-
           <div>
             <Form.Item label="Discount %" name="discountPercentage">
               <InputNumber
