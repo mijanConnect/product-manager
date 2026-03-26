@@ -104,7 +104,7 @@ export const EditProductForm: React.FC<EditProductFormProps> = ({
                 max={1000000}
                 step={0.01}
                 precision={2}
-                style={{ width: "100%" }}
+                className="w-full"
                 status={errors.price ? "error" : ""}
               />
             </Form.Item>
@@ -124,7 +124,7 @@ export const EditProductForm: React.FC<EditProductFormProps> = ({
                 min={0}
                 step={1}
                 precision={0}
-                style={{ width: "100%" }}
+                className="w-full"
                 status={errors.stock ? "error" : ""}
               />
             </Form.Item>
@@ -137,9 +137,7 @@ export const EditProductForm: React.FC<EditProductFormProps> = ({
         <div className="form-section">
           <div>
             <Form.Item label="Rating" name="rating">
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
-              >
+              <div className="flex items-center gap-2">
                 <Rate />
                 <span>{form.getFieldValue("rating") || 0} / 5</span>
               </div>
@@ -156,7 +154,7 @@ export const EditProductForm: React.FC<EditProductFormProps> = ({
                 max={100}
                 step={1}
                 placeholder="0"
-                style={{ width: "100%" }}
+                className="w-full"
                 status={errors.discountPercentage ? "error" : ""}
               />
             </Form.Item>
@@ -191,7 +189,7 @@ export const EditProductForm: React.FC<EditProductFormProps> = ({
         </div>
 
         <div className="full-width-field">
-          <Space style={{ width: "100%", justifyContent: "flex-end" }}>
+          <Space className="w-full flex justify-end">
             <Button onClick={onClose}>Cancel</Button>
             <Button type="primary" onClick={handleSubmit}>
               Save Changes
