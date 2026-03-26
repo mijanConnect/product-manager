@@ -180,9 +180,9 @@ export const ProductDetails: React.FC = () => {
                   <span className="text-sm text-gray-400 line-through">
                     {formatPrice(product.price)}
                   </span>
-                  <span className="px-2 py-1 bg-red-500 text-white rounded text-xs font-semibold">
+                  {/* <span className="px-2 py-1 bg-red-500 text-white rounded text-xs font-semibold">
                     -{product.discountPercentage}%
-                  </span>
+                  </span> */}
                 </div>
                 <div className="text-2xl font-bold text-red-500 mt-2">
                   {formatPrice(discountedPrice)}
