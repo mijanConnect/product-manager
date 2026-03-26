@@ -1,12 +1,11 @@
 .form-container {
-  padding: 16px 0;
+  padding: 0;
 }
 
 .form-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 0px;
 }
 
 .full-width-field {

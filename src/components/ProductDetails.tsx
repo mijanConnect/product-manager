@@ -173,7 +173,7 @@ export const ProductDetails: React.FC = () => {
           </div>
 
           {/* Price Section */}
-          <div className="mb-6 p-4 bg-gray-100 rounded-lg">
+          <div className="mb-6 py-4 bg-gray-100 rounded-lg">
             {discountedPrice && product.discountPercentage ? (
               <>
                 <div className="flex items-center gap-3">
@@ -199,7 +199,13 @@ export const ProductDetails: React.FC = () => {
           <div className="product-metrics">
             <div className="metric-item">
               <label>Stock Status</label>
-              <div className={product.stock > 0 ? "text-green-600 font-semibold" : "text-red-600 font-semibold"}>
+              <div
+                className={
+                  product.stock > 0
+                    ? "text-green-600 font-semibold"
+                    : "text-red-600 font-semibold"
+                }
+              >
                 {product.stock > 0
                   ? `${product.stock} Available`
                   : "Out of Stock"}
@@ -249,9 +255,7 @@ export const ProductDetails: React.FC = () => {
       {/* Description Section */}
       <Divider className="my-8" />
       <div>
-        <h2 className="text-xl font-semibold mb-3">
-          Description
-        </h2>
+        <h2 className="text-xl font-semibold mb-3">Description</h2>
         <p className="leading-relaxed text-gray-600 text-sm">
           {product.description}
         </p>
@@ -262,15 +266,11 @@ export const ProductDetails: React.FC = () => {
         <>
           <Divider className="my-8" />
           <div>
-            <h2 className="text-xl font-semibold mb-3">
-              Dimensions
-            </h2>
+            <h2 className="text-xl font-semibold mb-3">Dimensions</h2>
             <Row gutter={16}>
               <Col xs={24} sm={12} md={8}>
                 <div>
-                  <div className="text-xs text-gray-400 mb-1">
-                    Width
-                  </div>
+                  <div className="text-xs text-gray-400 mb-1">Width</div>
                   <div className="text-2xl font-semibold">
                     {product.dimensions.width} cm
                   </div>
@@ -278,9 +278,7 @@ export const ProductDetails: React.FC = () => {
               </Col>
               <Col xs={24} sm={12} md={8}>
                 <div>
-                  <div className="text-xs text-gray-400 mb-1">
-                    Height
-                  </div>
+                  <div className="text-xs text-gray-400 mb-1">Height</div>
                   <div className="text-2xl font-semibold">
                     {product.dimensions.height} cm
                   </div>
@@ -288,9 +286,7 @@ export const ProductDetails: React.FC = () => {
               </Col>
               <Col xs={24} sm={12} md={8}>
                 <div>
-                  <div className="text-xs text-gray-400 mb-1">
-                    Depth
-                  </div>
+                  <div className="text-xs text-gray-400 mb-1">Depth</div>
                   <div className="text-2xl font-semibold">
                     {product.dimensions.depth} cm
                   </div>
@@ -305,9 +301,7 @@ export const ProductDetails: React.FC = () => {
         <>
           <Divider className="my-8" />
           <div>
-            <h2 className="text-xl font-semibold mb-3">
-              Return Policy
-            </h2>
+            <h2 className="text-xl font-semibold mb-3">Return Policy</h2>
             <p className="leading-relaxed text-gray-600 text-sm">
               {product.returnPolicy}
             </p>
