@@ -100,7 +100,7 @@ export const ProductDetails: React.FC = () => {
         <Button
           icon={<ArrowLeftOutlined />}
           onClick={handleBack}
-          style={{ marginTop: 16 }}
+          className="mt-4"
         >
           Back to Products
         </Button>
@@ -117,7 +117,7 @@ export const ProductDetails: React.FC = () => {
       <Button
         icon={<ArrowLeftOutlined />}
         onClick={handleBack}
-        style={{ marginBottom: 24 }}
+        className="mb-6"
       >
         Back to Products
       </Button>
@@ -126,22 +126,11 @@ export const ProductDetails: React.FC = () => {
         {/* Image Section */}
         <div className="product-image-section">
           {product.images && product.images.length > 0 ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <div className="flex justify-center items-center">
               <img
                 src={product.images[0]}
                 alt={product.title}
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "500px",
-                  objectFit: "contain",
-                  borderRadius: "8px",
-                }}
+                className="max-w-full max-h-96 object-contain rounded-lg"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.src = product.thumbnail || "";
@@ -149,24 +138,12 @@ export const ProductDetails: React.FC = () => {
               />
             </div>
           ) : product.thumbnail ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <div className="flex justify-center items-center">
               <img
                 src={product.thumbnail}
                 alt={product.title}
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "500px",
-                  objectFit: "contain",
-                  borderRadius: "8px",
-                }}
+                className="max-w-full max-h-96 object-contain rounded-lg"
               />
-              categoryMap[product.category] ||
             </div>
           ) : (
             <Empty description="No image available" />
@@ -175,80 +152,44 @@ export const ProductDetails: React.FC = () => {
 
         {/* Details Section */}
         <div className="product-info-section">
-          <div style={{ marginBottom: 24 }}>
-            <div style={{ marginBottom: 8 }}>
+          <div className="mb-6">
+            <div className="mb-2">
               <span className="text-sm text-gray-500">
                 {categoryMap[product.category] || product.category}
               </span>
             </div>
             <h1>{product.title}</h1>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                marginTop: 8,
-              }}
-            >
+            <div className="flex items-center gap-3 mt-2">
               <Rate
                 value={product.rating}
                 disabled
                 allowHalf
-                style={{ fontSize: 20 }}
+                className="text-lg"
               />
-              <span style={{ fontSize: 16, fontWeight: 600 }}>
+              <span className="text-base font-semibold">
                 {product.rating.toFixed(1)}/5
               </span>
             </div>
           </div>
 
           {/* Price Section */}
-          <div
-            style={{
-              marginBottom: 24,
-              padding: "16px 0",
-              backgroundColor: "#f0f2f5",
-              borderRadius: "8px",
-            }}
-          >
+          <div className="mb-6 p-4 bg-gray-100 rounded-lg">
             {discountedPrice && product.discountPercentage ? (
               <>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <span
-                    style={{
-                      fontSize: 14,
-                      color: "#999",
-                      textDecoration: "line-through",
-                    }}
-                  >
+                <div className="flex items-center gap-3">
+                  <span className="text-sm text-gray-400 line-through">
                     {formatPrice(product.price)}
                   </span>
-                  <span
-                    style={{
-                      padding: "4px 8px",
-                      backgroundColor: "#ff4d4f",
-                      color: "white",
-                      borderRadius: "4px",
-                      fontSize: 12,
-                      fontWeight: 600,
-                    }}
-                  >
+                  <span className="px-2 py-1 bg-red-500 text-white rounded text-xs font-semibold">
                     -{product.discountPercentage}%
                   </span>
                 </div>
-                <div
-                  style={{
-                    fontSize: 28,
-                    fontWeight: 700,
-                    color: "#ff4d4f",
-                    marginTop: 8,
-                  }}
-                >
+                <div className="text-2xl font-bold text-red-500 mt-2">
                   {formatPrice(discountedPrice)}
                 </div>
               </>
             ) : (
-              <div style={{ fontSize: 28, fontWeight: 700, color: "#1890ff" }}>
+              <div className="text-2xl font-bold text-blue-500">
                 {formatPrice(product.price)}
               </div>
             )}
@@ -258,7 +199,7 @@ export const ProductDetails: React.FC = () => {
           <div className="product-metrics">
             <div className="metric-item">
               <label>Stock Status</label>
-              <div style={{ color: product.stock > 0 ? "#52c41a" : "#f5222d" }}>
+              <div className={product.stock > 0 ? "text-green-600 font-semibold" : "text-red-600 font-semibold"}>
                 {product.stock > 0
                   ? `${product.stock} Available`
                   : "Out of Stock"}
@@ -299,19 +240,19 @@ export const ProductDetails: React.FC = () => {
             <Alert
               type="warning"
               message="This product is currently out of stock"
-              style={{ marginTop: 16 }}
+              className="mt-4"
             />
           )}
         </div>
       </div>
 
       {/* Description Section */}
-      <Divider style={{ margin: "32px 0" }} />
+      <Divider className="my-8" />
       <div>
-        <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12 }}>
+        <h2 className="text-xl font-semibold mb-3">
           Description
         </h2>
-        <p style={{ lineHeight: 1.6, color: "#595959", fontSize: 14 }}>
+        <p className="leading-relaxed text-gray-600 text-sm">
           {product.description}
         </p>
       </div>
@@ -319,38 +260,38 @@ export const ProductDetails: React.FC = () => {
       {/* Additional Info */}
       {product.dimensions && (
         <>
-          <Divider style={{ margin: "32px 0" }} />
+          <Divider className="my-8" />
           <div>
-            <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12 }}>
+            <h2 className="text-xl font-semibold mb-3">
               Dimensions
             </h2>
             <Row gutter={16}>
               <Col xs={24} sm={12} md={8}>
                 <div>
-                  <div style={{ fontSize: 12, color: "#999", marginBottom: 4 }}>
+                  <div className="text-xs text-gray-400 mb-1">
                     Width
                   </div>
-                  <div style={{ fontSize: 24, fontWeight: 600 }}>
+                  <div className="text-2xl font-semibold">
                     {product.dimensions.width} cm
                   </div>
                 </div>
               </Col>
               <Col xs={24} sm={12} md={8}>
                 <div>
-                  <div style={{ fontSize: 12, color: "#999", marginBottom: 4 }}>
+                  <div className="text-xs text-gray-400 mb-1">
                     Height
                   </div>
-                  <div style={{ fontSize: 24, fontWeight: 600 }}>
+                  <div className="text-2xl font-semibold">
                     {product.dimensions.height} cm
                   </div>
                 </div>
               </Col>
               <Col xs={24} sm={12} md={8}>
                 <div>
-                  <div style={{ fontSize: 12, color: "#999", marginBottom: 4 }}>
+                  <div className="text-xs text-gray-400 mb-1">
                     Depth
                   </div>
-                  <div style={{ fontSize: 24, fontWeight: 600 }}>
+                  <div className="text-2xl font-semibold">
                     {product.dimensions.depth} cm
                   </div>
                 </div>
@@ -362,12 +303,12 @@ export const ProductDetails: React.FC = () => {
 
       {product.returnPolicy && (
         <>
-          <Divider style={{ margin: "32px 0" }} />
+          <Divider className="my-8" />
           <div>
-            <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12 }}>
+            <h2 className="text-xl font-semibold mb-3">
               Return Policy
             </h2>
-            <p style={{ lineHeight: 1.6, color: "#595959", fontSize: 14 }}>
+            <p className="leading-relaxed text-gray-600 text-sm">
               {product.returnPolicy}
             </p>
           </div>
